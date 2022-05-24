@@ -2785,6 +2785,12 @@ var module_default = src_default;
 
 // app.js
 console.log("JS is loaded");
+function myData() {
+  return {
+    paragraph: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, possimus."
+  };
+}
+window.myData = myData;
 window.Alpine = module_default;
 module_default.start();
 //# sourceMappingURL=app.bundle.js.map
