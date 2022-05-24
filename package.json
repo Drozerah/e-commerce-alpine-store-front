@@ -13,5 +13,8 @@
     "gulp": "^4.0.2",
     "gulp-esbuild": "^0.10.3",
     "gulp-size": "^4.0.1"
+  },
+  "dependencies": {
+    "alpinejs": "^3.10.2"
   }
 }
