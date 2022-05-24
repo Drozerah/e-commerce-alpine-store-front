@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["app.js"],
+  "sourcesContent": ["console.log('JS is loaded') // !DEBUG"],
+  "mappings": ";AAAA,QAAQ,IAAI,cAAc;",
+  "names": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "alpine-esbuild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "gulp dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-esbuild": "^0.10.3",
+    "gulp-size": "^4.0.1"
+  }
+}
