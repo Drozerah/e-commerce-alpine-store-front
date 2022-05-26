@@ -70,6 +70,26 @@ Alpine.store('_', {
     }
   },
 
+  delete(root) {
+    // ref product id
+    const id = root.dataset.id
+    const isProductToDelete = this.products.find((product) => product.id == id)
+    if(isProductToDelete){
+      // remove product from counter
+      delete this.counter[isProductToDelete.id]
+      // remove quantity from cart_total
+      this.cart_total = this.cart_total - isProductToDelete.quantity
+      // remove product quatity
+      isProductToDelete.quantity = 0
+      // update cart amount
+      this.cart_amount = this.getCartAmount()
+      // update cart products list
+      this.products = this.products.filter((product) => product.id !== id)
+    } else {
+      return
+    }
+  },
+
   remove(root) {
     // ref product id
     const id = root.dataset.id
@@ -80,8 +100,7 @@ Alpine.store('_', {
         this.updateStore('decrement', product)
       } else {
         // remove product
-        this.products = this.products.filter((product) => product.id !== id)
-        this.updateStore('decrement', product)
+        this.delete(root)
       }
     }
   },
