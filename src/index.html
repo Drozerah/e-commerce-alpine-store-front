@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/js/app.bundle.js" defer></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>My E-Commerce</h1>
+    <hr>
+    <!-- cart info -->
+    <div
+      class="cart__info"
+      x-data
+    >
+      <div>Cart</div>
+      <div 
+        class="cart__info__counter rounded"
+        x-text="$store._.cart_total"
+      >
+      </div>
+    </div>
+    <!-- end cart info -->
+    <hr>
+  </header>
+  <br>
+  <!-- cart product -->
+  <div 
+    data-id="recPPMXgGkfXxMmoP"
+    data-name="Watermelon"
+    data-weight="200"
+    data-price="5"
+    x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
+    x-init="$store._._init($root)"
+    >
+    <div x-tash="name, weight">{name} {weight}g</div>
+    <code x-text="$root.dataset.id"></code>
+    <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
+    <div x-money="($root.dataset.price * 100) * $store._.counter[$root.dataset.id]" data-lang="fr-FR" data-currency="EUR"></div>
+    <br>
+    <div class="btn">
+      <button @click="$store._.remove($root.dataset.id)">-</button>
+      <input min="0" max="100" :value="$store._.counter[$root.dataset.id]" disabled></input>
+      <button @click="$store._.add($root.dataset.id)">+</button>
+    </div>
+  </div>
+  <!-- end product -->
+  <br>
+  <!-- cart product -->
+  <div 
+    data-id="recNaLU8GwHJowXTu"
+    data-name="Pineapple"
+    data-weight="25"
+    data-price="15"
+    x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
+    x-init="$store._._init($root)"
+    >
+    <div x-tash="name, weight">{name} {weight}g</div>
+    <code x-text="$root.dataset.id"></code>
+    <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
+    <div x-money="($root.dataset.price * 100) * $store._.counter[$root.dataset.id]" data-lang="fr-FR" data-currency="EUR"></div>
+    <br>
+    <div class="btn">
+      <button @click="$store._.remove($root.dataset.id)">-</button>
+      <input min="0" max="100" :value="$store._.counter[$root.dataset.id]" disabled></input>
+      <button @click="$store._.add($root.dataset.id)">+</button>
+    </div>
+  </div>
+  <!-- end cart product -->
+  <br>
+  <!-- cart amount -->
+  <div>
+    <hr>
+    <div x-data> 
+    <div>
+      <span>Cart Amount:</span>
+      <span x-money="$store._.cart_amount * 100" data-lang="fr-FR" data-currency="EUR"></span>
+    </div>
+    </div>
+    <hr>
+  </div>
+  <!-- end cart amount -->
+</body>
+</html>

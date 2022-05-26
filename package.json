@@ -1,20 +1,31 @@
 {
-  "name": "alpine-esbuild",
+  "name": "e-commerce-alpine-store",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "express": "^4.18.1",
+    "fancy-log": "^2.0.0",
     "gulp": "^4.0.2",
+    "gulp-dart-sass": "^1.0.2",
     "gulp-esbuild": "^0.10.3",
-    "gulp-size": "^4.0.1"
+    "gulp-nodemon": "^2.5.0",
+    "gulp-open": "^3.0.1",
+    "gulp-size": "^4.0.1",
+    "nodemon": "^2.0.16"
   },
   "dependencies": {
-    "alpinejs": "^3.10.2"
+    "@alpinejs/mask": "^3.10.2",
+    "@alpinejs/persist": "^3.10.2",
+    "alpinejs": "^3.10.2",
+    "alpinejs-money": "^1.0.0",
+    "alpinejs-tash": "^1.0.4"
   }
 }
