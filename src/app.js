@@ -90,6 +90,14 @@ Alpine.store('_', {
     }
   },
 
+  clear(){
+    console.log('clear');
+    this.counter = {}
+    this.products = []
+    this.cart_total = 0
+    this.cart_amount = 0
+  },
+
   remove(root) {
     // ref product id
     const id = root.dataset.id

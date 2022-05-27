@@ -13,10 +13,7 @@
     <h1>My E-Commerce</h1>
     <hr>
     <!-- cart info -->
-    <div
-      class="cart__info"
-      x-data
-    >
+    <div class="cart__info" x-data>
       <div>Cart</div>
       <div 
         class="cart__info__counter rounded"
@@ -45,7 +42,7 @@
     <div class="btn">
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
-      <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0"></input>
+      <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
       <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
@@ -68,7 +65,7 @@
     <div class="btn">
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
-      <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0"></input>
+      <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
       <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
@@ -91,7 +88,7 @@
     <div class="btn">
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
-      <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0"></input>
+      <input  min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
       <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
@@ -109,5 +106,13 @@
     <hr>
   </div>
   <!-- end cart amount -->
+  <div>
+    <button
+      x-data
+      :disabled="$store._.cart_total == 0"
+      @click="$store._.clear()"
+    >Clear Cart</button>
+  </div>
+  <hr>
 </body>
 </html>
