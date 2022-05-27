@@ -65,6 +65,8 @@ input::selection{
 
 .cart__info{
   display: flex;
+  width: fit-content;
+  cursor: pointer;
   &__counter{
     margin-left: 5px;
   }
@@ -95,7 +97,7 @@ input::selection{
 .transition {
   transition-property: transform, opacity;
   transition-timing-function: ease-out;
-  transition-duration: 500ms;
+  transition-duration: 200ms;
 }
 
 .translate-x-full {

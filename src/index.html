@@ -14,7 +14,11 @@
     <h1>My E-Commerce</h1>
     <hr>
     <!-- cart info -->
-    <div class="cart__info" x-data>
+    <div 
+      class="cart__info" 
+      x-data
+      @click="$store._.isCartDialog = !$store._.isCartDialog"
+    >
       <div>Cart</div>
       <div
         class="cart__info__counter rounded"
@@ -113,6 +117,7 @@
     <hr>
   </div>
   <!-- end cart amount -->
+  <!-- clear cart button -->
   <div>
     <button
       x-data
@@ -121,34 +126,41 @@
     >Clear Cart</button>
     <hr>
   </div>
-  <div x-data="{ slideOut: false }">
-    
+  <!-- end clear cart button -->
+  <!-- cart dialog -->
+  <div x-data>
+    <!-- cart dialog button -->
     <button
-      @click="slideOut = !slideOut"
-      :disabled="slideOut"
+      @click="$store._.isCartDialog = !$store._.isCartDialog"
+      :disabled="$store._.isCartDialog"
     >
       View Cart
     </button>
-  
+    <!-- end cart dialog button -->
+    <!-- cart dialog-->
+    <!-- cart dialog overlay -->
     <div
       class="overlay"
-      x-show="slideOut"
+      x-show="$store._.isCartDialog"
       x-transition.opacity
     ></div>
-  
+    <!-- end cart dialog overlay -->
+    <!-- cart dialog content -->
     <div
       class="slideout"
-      x-show="slideOut"
+      x-show="$store._.isCartDialog"
       x-transition:enter-start="translate-x-full"
       x-transition:enter="transition"
       x-transition:enter-end="translate-x-0"
       x-transition:leave-start="translate-x-0"
       x-transition:leave="transition"
       x-transition:leave-end="translate-x-full"
-      @click.away="slideOut = false"
+      @click.away="$store._.isCartDialog = !$store._.isCartDialog"
     >
       <h2>My Cart:</h2>
     </div>
+    <!-- end cart dialog content -->
   </div>
+  <!-- end cart dialog -->
 </body>
 </html>

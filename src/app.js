@@ -15,6 +15,7 @@ Alpine.store('_', {
   cart_total: 0,
   cart_amount: 0,
   isInit: false, // this._init once
+  isCartDialog: Alpine.$persist(false).as('isCartDialog'), // show/hide cart dialog box
 
   updateStore(event, product){
     if (event === 'increment') {
