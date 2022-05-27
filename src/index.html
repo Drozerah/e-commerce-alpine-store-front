@@ -7,6 +7,7 @@
   <title>Document</title>
   <script src="/js/app.bundle.js" defer></script>
   <link rel="stylesheet" href="/css/style.css">
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 <body>
   <header>
@@ -15,7 +16,7 @@
     <!-- cart info -->
     <div class="cart__info" x-data>
       <div>Cart</div>
-      <div 
+      <div
         class="cart__info__counter rounded"
         x-text="$store._.cart_total"
       >
@@ -31,11 +32,13 @@
     data-name="Watermelon"
     data-weight="200"
     data-price="5"
+    data-stock="true"
     x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
     x-init="$store._._init()"
     >
     <div x-tash="name, weight">{name} {weight}g</div>
     <code x-text="$root.dataset.id"></code>
+    <span :class="$root.dataset.stock" class="stock">In stock</span>
     <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
@@ -43,7 +46,7 @@
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
+      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end product -->
@@ -54,11 +57,13 @@
     data-name="Pineapple"
     data-weight="25"
     data-price="15"
+    data-stock="false"
     x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
     x-init="$store._._init()"
     >
     <div x-tash="name, weight">{name} {weight}g</div>
     <code x-text="$root.dataset.id"></code>
+    <span :class="$root.dataset.stock" class="stock">In stock</span>
     <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
@@ -66,7 +71,7 @@
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
+      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end cart product -->
@@ -77,11 +82,13 @@
     data-name="Orange"
     data-weight="80"
     data-price="2"
+    data-stock='true'
     x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
     x-init="$store._._init()"
     >
     <div x-tash="name, weight">{name} {weight}g</div>
     <code x-text="$root.dataset.id"></code>
+    <span :class="$root.dataset.stock" class="stock">In stock</span>
     <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
@@ -89,7 +96,7 @@
       <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
       <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input  min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$store._.counter[$root.dataset.id] == 10">+</button>
+      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end cart product -->
@@ -112,7 +119,36 @@
       :disabled="$store._.cart_total == 0"
       @click="$store._.clear()"
     >Clear Cart</button>
+    <hr>
   </div>
-  <hr>
+  <div x-data="{ slideOut: false }">
+    
+    <button
+      @click="slideOut = !slideOut"
+      :disabled="slideOut"
+    >
+      View Cart
+    </button>
+  
+    <div
+      class="overlay"
+      x-show="slideOut"
+      x-transition.opacity
+    ></div>
+  
+    <div
+      class="slideout"
+      x-show="slideOut"
+      x-transition:enter-start="translate-x-full"
+      x-transition:enter="transition"
+      x-transition:enter-end="translate-x-0"
+      x-transition:leave-start="translate-x-0"
+      x-transition:leave="transition"
+      x-transition:leave-end="translate-x-full"
+      @click.away="slideOut = false"
+    >
+      <h2>My Cart:</h2>
+    </div>
+  </div>
 </body>
 </html>
