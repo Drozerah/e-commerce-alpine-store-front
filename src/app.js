@@ -150,3 +150,6 @@ window.Alpine = Alpine
 Alpine.plugin(money)
 Alpine.plugin(tash)
 Alpine.start()
+
+// reload opend tabs
+window.addEventListener('storage', () => location.reload())

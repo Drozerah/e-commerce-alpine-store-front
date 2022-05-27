@@ -58,6 +58,9 @@ input::selection{
   justify-content: center;
   font-size: 12px;
   line-height: 12px;
+  &::selection{
+    background-color: transparent;
+  }
 }
 
 .cart__info{
