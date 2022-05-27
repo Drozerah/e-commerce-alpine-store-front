@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>My E-Commerce</title>
   <script src="/js/app.bundle.js" defer></script>
   <link rel="stylesheet" href="/css/style.css">
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
@@ -47,10 +47,10 @@
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
     <div class="btn">
-      <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
-      <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
+      <button type="button" class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
+      <button type="button" @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
+      <button type="button" @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end product -->
@@ -72,10 +72,35 @@
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
     <div class="btn">
-      <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
-      <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
+      <button type="button" class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
+      <button type="button" @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
+      <button type="button" @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
+    </div>
+  </div>
+  <!-- end cart product -->
+  <br>
+  <!-- cart product -->
+  <div 
+    data-id="rechLPKwTwDiiRA6a"
+    data-name="Guava"
+    data-weight="100"
+    data-price="9"
+    data-stock='true'
+    x-data="{name: $el.dataset.name, weight: $el.dataset.weight}"
+    x-init="$store._._init()"
+    >
+    <div x-tash="name, weight">{name} {weight}g</div>
+    <code x-text="$root.dataset.id"></code>
+    <span :class="$root.dataset.stock" class="stock">In stock</span>
+    <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
+    <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
+    <br>
+    <div class="btn">
+      <button type="button" class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
+      <button type="button" @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
+      <input  min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
+      <button type="button" @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end cart product -->
@@ -97,10 +122,10 @@
     <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div>
     <br>
     <div class="btn">
-      <button class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
-      <button @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
+      <button type="button" class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button>
+      <button type="button" @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
       <input  min="0" max="100" :value="$store._.counter[$root.dataset.id] || 0" disabled></input>
-      <button @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
+      <button type="button" @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
     </div>
   </div>
   <!-- end cart product -->
@@ -119,7 +144,8 @@
   <!-- end cart amount -->
   <!-- clear cart button -->
   <div>
-    <button
+    <button 
+      type="button"
       x-data
       :disabled="$store._.cart_total == 0"
       @click="$store._.clear()"
@@ -131,6 +157,7 @@
   <div x-data>
     <!-- cart dialog button -->
     <button
+      type="button"
       @click="$store._.isCartDialog = !$store._.isCartDialog"
       :disabled="$store._.isCartDialog"
     >
@@ -147,7 +174,7 @@
     <!-- end cart dialog overlay -->
     <!-- cart dialog content -->
     <div
-      class="slideout"
+      class="cart__dialog"
       x-show="$store._.isCartDialog"
       x-transition:enter-start="translate-x-full"
       x-transition:enter="transition"
@@ -157,7 +184,37 @@
       x-transition:leave-end="translate-x-full"
       @click.away="$store._.isCartDialog = !$store._.isCartDialog"
     >
-      <h2>My Cart:</h2>
+      <div class="cart__dialog__header">
+        <h2 class="cart__dialog__title" x-text="`Cart (${$store._.cart_total})`"></h2>
+        <button type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" >X</button>
+      </div>
+      <ul class="cart__dialog__products">
+        <template x-for="product in $store._.products">
+            <li class="cart__dialog__product list" x-data="{name: product.name, weight: product.weight}">
+              <div class="cart__dialog__product__thumbnail">
+                <img src="https://via.placeholder.com/70" alt="" srcset="">
+              </div>
+              <div class="cart__dialog__product__infos">
+                <div class="cart__dialog__product__details">
+                  <div class="cart__dialog__product__title" x-tash="name,weight">{name} {weight}g</div>
+                  <div x-money="(product.price * 100) * (product.quantity)" data-lang="fr-FR" data-currency="EUR"></div>
+                </div>
+              </div>
+            </li>
+        </template>
+      </ul>
+      <div class="cart__dialog__footer">
+        <div class="cart__dialog__subtotal">
+          <div>Subtotal</div>
+          <div x-money="$store._.cart_amount * 100" data-lang="fr-FR" data-currency="EUR"></div>
+        </div>
+        <div>
+          Shipping will be calculated at checkout.
+        </div>
+        <div class="cart__dialog__checkout">
+          <button type="button" disabled>CHECKOUT</button>
+        </div>
+      </div>
     </div>
     <!-- end cart dialog content -->
   </div>

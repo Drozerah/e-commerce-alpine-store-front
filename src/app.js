@@ -147,6 +147,13 @@ Alpine.store('_', {
   }
 })
 
+Alpine.effect(() => {
+  // add/remove class name of noScroll to body according to slideout state
+  const isCartDialog = Alpine.store('_').isCartDialog
+  const body = document.body
+  isCartDialog === true ? body.classList.add('noScroll') : body.classList.remove('noScroll')
+})
+
 window.Alpine = Alpine
 Alpine.plugin(money)
 Alpine.plugin(tash)
