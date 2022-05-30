@@ -1,0 +1,6 @@
+<button 
+type="button"
+x-data
+:disabled="$store._.cart_total == 0"
+@click="$store._.clear()"
+>Clear Cart</button>

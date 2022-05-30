@@ -46,18 +46,13 @@
   <!-- end cart amount -->
   <!-- cart dialog button -->
   <div>
-    <button x-data type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" :disabled="$store._.isCartDialog">View Cart</button>
-  <hr>
+    @@include('./components/cart/buttons/_cart_show_dialog_btn.html')
+    <hr>
   </div>
   <!-- end cart dialog button -->
   <!-- clear cart button -->
   <div>
-    <button 
-      type="button"
-      x-data
-      :disabled="$store._.cart_total == 0"
-      @click="$store._.clear()"
-    >Clear Cart</button>
+    @@include('./components/cart/buttons/_cart_clear_btn.html')
   </div>
   <!-- end clear cart button -->
 
