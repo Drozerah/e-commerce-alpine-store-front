@@ -58,7 +58,8 @@ const config = {
     outfile: ENTRY_POINT_BUNDLE,
   },
   scss: {
-    src: path.join(SRC_DIR, MAIN_SCSS_FILE_NAME),
+    glob: path.join(SRC_DIR, 'scss', '**/*.scss'),
+    src: path.join(SRC_DIR, 'scss', MAIN_SCSS_FILE_NAME),
     dest: path.join(OUTPUT_DIR, 'css'),
   },
   html: {
@@ -160,7 +161,7 @@ const startExpress = () => {
 
 // Define watchers
 const watch_js = () => watch(config.js.src, esbuild).on('change', () => log("Watching 'js'"))
-const watch_sass = () => watch(config.scss.src, sass).on('change', () => log("Watching 'sass'"))
+const watch_sass = () => watch(config.scss.glob, sass).on('change', () => log("Watching 'sass'"))
 const watch_html = () => watch(config.html.glob, html).on('change', () => log("Watching 'html'"))
 
 /**

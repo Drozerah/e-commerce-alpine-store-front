@@ -1,0 +1,109 @@
+// https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
+body.noScroll{
+  overflow-y: hidden;
+}
+
+.overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--overlay);
+}
+
+.cart__dialog{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 50;
+  width: 100vw;
+  max-width: 23rem;
+  opacity: 1;
+  background-color: var(--white);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  &__default{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__main{
+    list-style: none;
+    padding: 0px;
+  }
+  &__product{
+    &__infos{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    &__details, &__selection{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__thumbnail{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: .75rem;
+      img{
+        // height: 70px;
+        // width: 70px;
+        border-radius: 3px;
+      }
+    }
+  }
+  &__footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 1.5rem;
+    background-color: var(--blue-ligthen);
+    border-top: 1px solid var(--gray-ligthen);
+  }
+  &__subtotal{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__checkout{
+    display: flex;
+    padding-top: 1.5rem;
+    button{
+      width: 100%;
+      padding: .95rem;
+    }
+  }
+  .list{
+    display: flex;
+  }
+  .list + .list {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--gray-ligthen);
+    padding-top: 1.5rem;
+  }
+}
+
+.transition {
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transition-duration: 200ms;
+}
+
+.translate-x-full {
+  transform: translate(100%);
+}
+
+.translate-x-0 {
+  transform: translate(0px);
+}

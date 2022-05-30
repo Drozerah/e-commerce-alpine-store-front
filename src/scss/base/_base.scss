@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
+
+
+body {
+  min-height: 100vh; // minimum full viewport height
+  width: 100%; // full viewport width
+  display: flex;
+  // align-items: center;
+  flex-direction: column;
+  // justify-content: center;
+  font-family: 'Shippori Mincho', serif;
+  color: var(--black);
+  box-sizing: border-box;
+  margin: 0px; // remove default browser margin
+  padding: 0px 20px 20px 20px; // remove default browser padding
+}

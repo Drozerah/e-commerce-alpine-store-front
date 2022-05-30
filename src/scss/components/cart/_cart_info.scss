@@ -1,0 +1,24 @@
+.rounded{
+  border-radius: 9999px;
+  background-color: var(--black);
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 12px;
+  &::selection{
+    background-color: transparent;
+  }
+}
+
+.cart__info{
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+  &__counter{
+    margin-left: 5px;
+  }
+}

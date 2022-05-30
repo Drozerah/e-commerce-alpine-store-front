@@ -1,0 +1,59 @@
+.btn{
+  display: flex;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  text-decoration: none; 
+  &:disabled{
+    cursor: not-allowed;
+  }
+  &::selection{
+    background-color: transparent;
+  }
+}
+
+input::selection{
+  background-color: transparent;
+}
+
+.btn{
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+.btn input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50px;
+  padding: 0px;
+}
+
+.stock{
+  display: inline-flex;
+  font-family: monospace;
+  font-size: 10px;
+  width: fit-content;
+  padding: 0px 3px 2px 3px;
+  border-radius: 2px;
+  color: var(--gray);
+  &.true{
+    background-color: var(--green-ligthen);
+  }
+  &.false{
+    background-color: var(--orange-ligthen);
+    text-decoration: line-through;
+  }
+}
