@@ -2,7 +2,6 @@
 <code x-text="$root.dataset.id"></code>
 <span :class="$root.dataset.stock" class="stock">In stock</span>
 <div x-money="$root.dataset.price * 100" data-lang="fr-FR" data-currency="EUR"></div>
-<!-- <div x-money="($root.dataset.price * 100) * ($store._.counter[$root.dataset.id] || 0)" data-lang="fr-FR" data-currency="EUR"></div> -->
 <br>
 <!-- we don't have products -->
 <template x-if="($store._.counter[$root.dataset.id] || 0) === 0">
@@ -16,6 +15,5 @@
     <button type="button" @click="$store._.remove($root)" :disabled="!$store._.counter[$root.dataset.id]">-</button>
     <input inputmode="numeric" min="0" max="100" :value="$store._.counter[$root.dataset.id]" disabled></input>
     <button type="button" @click="$store._.add($root)" :disabled="$root.dataset.stock == 'false' || $store._.counter[$root.dataset.id] == 10">+</button>
-    <!-- <button type="button" class="delete" @click="$store._.delete($root)" :disabled="!$store._.counter[$root.dataset.id]">Delete</button> -->
   </div>
 </template>
