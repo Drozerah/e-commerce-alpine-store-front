@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
-
+@use './typography' as *;
 
 body {
   min-height: 100vh; // minimum full viewport height
