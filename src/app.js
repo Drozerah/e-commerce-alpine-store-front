@@ -6,6 +6,17 @@ console.log('JS is loaded') // !DEBUG
 
 Alpine.plugin(persist)
 
+Alpine.data('filters', () => ({
+  format_weight (weight) {
+    if (weight >= 1000) {
+      weight = weight / 1000
+      return `${weight > 1 ? `${weight} kgs` : `${weight} kg` }`
+    } else {
+      return `${weight === 0 ? weight : `${weight} g` }`
+    }
+  }
+}))
+
 Alpine.store('_', {
 
   storageName: 'cart', // set storage key name

@@ -1,6 +1,6 @@
-<div x-data> 
+<div x-data="filters"> 
   <div>
     <span>Cart Weight:</span>
-    <span x-text="$store._.cart_weight"></span>
+    <span x-text="format_weight($store._.cart_weight)"></span>
   </div>
 </div>
