@@ -13,3 +13,13 @@ body {
   margin: 0px; // remove default browser margin
   padding: 0px 20px 20px 20px; // remove default browser padding
 }
+
+main{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+footer{
+  text-align: center;
+}

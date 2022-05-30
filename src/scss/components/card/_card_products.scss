@@ -57,3 +57,18 @@ input::selection{
     text-decoration: line-through;
   }
 }
+
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: auto;
+  .product{
+    border: 1px solid var(--gray-ligthen) ;
+    min-width: 200px;
+    padding: 20px;
+  }
+}
