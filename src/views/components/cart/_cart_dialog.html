@@ -22,20 +22,22 @@
         <h2 class="cart__dialog__title" x-text="`Cart (${$store._.cart_total})`"></h2>
         <button type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" >X</button>
       </div>
+      <!-- end cart dialog header -->
+      <!-- cart dialog default -->
       <div x-show="!$store._.cart_total" class="cart__dialog__default">
         <h3>Your cart is empty</h3>
       </div>
-      <!-- end cart dialog header -->
+      <!-- end dialog default -->
       <!-- cart dialog main -->
-      <ul class="cart__dialog__main">
+      <ul class="cart__dialog__content">
         <template x-for="product in $store._.products" :key="product.id">
             <li class="cart__dialog__product list" x-data="{name: product.name, weight: product.weight}">
               <div class="cart__dialog__product__thumbnail">
                 <img src="/img/thumbnails/placeholder_70.png" alt="" srcset="">
               </div>
               <div class="cart__dialog__product__infos">
-                <div class="cart__dialog__product__details">
-                  <div class="cart__dialog__product__title" x-tash="name, weight">{name} {weight}g</div>
+                <div class="cart__dialog__product__details fw-600">
+                  <a href="/"><div class="cart__dialog__product__title" x-tash="name, weight">{name} {weight}g</div></a>
                   <div x-money="(product.price * 100) * (product.quantity)" data-lang="fr-FR" data-currency="EUR"></div>
                 </div>
                 <div class="cart__dialog__product__selection">
@@ -53,7 +55,7 @@
       <!-- end cart dialog main -->
       <!-- cart dialog footer -->
       <div x-show="$store._.cart_total" class="cart__dialog__footer">
-        <div class="cart__dialog__subtotal">
+        <div class="cart__dialog__subtotal fw-600">
           <div>Subtotal</div>
           <div x-money="$store._.cart_amount * 100" data-lang="fr-FR" data-currency="EUR"></div>
         </div>
@@ -66,6 +68,5 @@
       </div>
       <!-- end cart dialog footer -->
     </div>
-    <!-- end cart dialog content -->
   </div>
   <!-- end cart dialog container -->

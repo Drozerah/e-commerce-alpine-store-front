@@ -19,79 +19,91 @@ body.noScroll{
   right: 0;
   z-index: 50;
   width: 100vw;
-  max-width: 23rem;
+  max-width: 25rem;
   opacity: 1;
   background-color: var(--white);
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  &__default{
+  display: flex;
+  flex-direction: column;
+
+  &__header{
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2{
+      margin: 0;
+    }
+  }
+
+  &__content{
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 0 1.5rem;
+    .list{
+      display: flex;
+      height: 70px;
+      &:last-of-type{
+        margin-bottom: 1.5rem;
+      }
+    }
+    .list + .list {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--gray-ligthen);
+      padding-top: 1.5rem;
+    }
+  }
+
+
+  &__default {
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  &__header{
+
+  &__product__infos {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__product__thumbnail {
+    margin-right: 0.75rem;
+    img{
+      height: 70px;
+      width: 70px;
+      border-radius: 3px;
+    }
+  }
+
+  &__product__details, &__product__selection{
+    display: flex;
     align-items: center;
+    justify-content: space-between;
   }
-  &__main{
-    list-style: none;
-    padding: 0px;
-  }
-  &__product{
-    &__infos{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    &__details, &__selection{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    &__thumbnail{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: .75rem;
-      img{
-        // height: 70px;
-        // width: 70px;
-        border-radius: 3px;
-      }
-    }
-  }
+  
   &__footer{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 1.5rem;
-    background-color: var(--blue-ligthen);
     border-top: 1px solid var(--gray-ligthen);
+    margin-top: auto;
+    background-color: aliceblue;
+    padding: 1.5rem;
   }
   &__subtotal{
     display: flex;
+    align-items: center;
     justify-content: space-between;
   }
-  &__checkout{
+  &__checkout {
     display: flex;
     padding-top: 1.5rem;
     button{
       width: 100%;
-      padding: .95rem;
+      padding: 0.95rem;
     }
-  }
-  .list{
-    display: flex;
-  }
-  .list + .list {
-    margin-top: 1.5rem;
-    border-top: 1px solid var(--gray-ligthen);
-    padding-top: 1.5rem;
-  }
+}
 }
 
 .transition {
