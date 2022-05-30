@@ -8,6 +8,7 @@
  * Node modules 
  */
 const path = require('node:path')
+const fs = require('node:fs')
 
 /**
  * NPM modules 
@@ -19,24 +20,35 @@ const {
   series,
   parallel
 } = require('gulp')
-const {
-  createGulpEsbuild
-} = require('gulp-esbuild')
-const gulpEsbuild = createGulpEsbuild({
-  incremental: true
-})
+
+// const {
+//   createGulpEsbuild
+// } = require('gulp-esbuild')
+// const gulpEsbuild = createGulpEsbuild({
+//   incremental: true,
+//   piping: true, 
+// })
+const gulpEsbuild = require('gulp-esbuild')
+require('colors')
 const size = require('gulp-size')
 const _sass = require('gulp-dart-sass')
 const open = require('gulp-open')
 const log = require('fancy-log')
 const nodemon = require('gulp-nodemon')
-const html_file_include  = require('gulp-file-include') // dev & prod
+const html_file_include  = require('gulp-file-include')
+const _del = require('del')
+const _if = require('gulp-if')
+const replace = require('gulp-replace')
+const rename = require("gulp-rename")
 
 /**
  * ------------------------------------------------------------------------
  * Constants Definition
  * ------------------------------------------------------------------------
  */
+const { NODE_ENV = 'development' } = process.env
+const isProduction = NODE_ENV === 'production' ? true : false
+const isDevelopment = NODE_ENV === 'development' ? true : false
 const BASE_DIR = process.cwd()
 const SRC_DIR_NAME = 'src'
 const OUTPUT_DIR_NAME = 'public'
@@ -55,7 +67,7 @@ const config = {
   js: {
     src: path.join(SRC_DIR, ENTRY_POINT),
     dest: path.join(OUTPUT_DIR, 'js'),
-    outfile: ENTRY_POINT_BUNDLE,
+    outfile: isDevelopment ? ENTRY_POINT_BUNDLE : ENTRY_POINT_BUNDLE_MIN,
   },
   scss: {
     glob: path.join(SRC_DIR, 'scss', '**/*.scss'),
@@ -78,6 +90,29 @@ const config = {
  * Functions Definition
  * ------------------------------------------------------------------------
  */
+
+// Log env variables
+// @{returns} gulp cb()
+const logger = (done) => {
+  log(`[NODE_ENV] '${NODE_ENV}'`.yellow) // !DEBUG
+  log(`[OUTPUT_DIR_NAME] '${OUTPUT_DIR_NAME}'`.yellow) // !DEBUG
+  // log(`[SITE_NAME] '${SITE_NAME}'`.yellow) // !DEBUG
+  done()
+}
+
+// Remove OUTPUT_DIR if already exists
+const del = (done) => {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    log(`No such directory '${OUTPUT_DIR_NAME}' to remove`.red)
+    done()
+  } else {
+    _del(OUTPUT_DIR).then(() => {
+      log(`Removed existing '${OUTPUT_DIR_NAME}' directory`.green)
+      done()
+    })
+  }
+}
+
 // Build JAVASCRIPT
 const esbuild = () => {
   const _src = config.js.src
@@ -87,7 +122,13 @@ const esbuild = () => {
     .pipe(gulpEsbuild({
       outfile,
       bundle: true,
-      sourcemap: true,
+      sourcemap: isDevelopment, // dev
+      ignoreAnnotations: true,
+      legalComments: 'none',
+      minify: isProduction, // prod
+      minifyWhitespace: isProduction, // prod
+      minifyIdentifiers: isProduction, // prod
+      minifySyntax: isProduction, // prod
       format: 'esm', // 'iife'|'cjs'|'esm'
     }))
     .pipe(size({
@@ -103,8 +144,9 @@ const sass = () => {
   const _dest = config.scss.dest
   return src(_src)
     .pipe(_sass({
-      outputStyle: 'expanded', // 'expanded' | 'compressed'
+      outputStyle: isDevelopment ? 'expanded' : 'compressed' // dev || prod
     }).on('error', _sass.logError))
+    .pipe(_if(isProduction, rename(MAIN_CSS_FILE_NAME_MIN))) // prod rename
     .pipe(size({
       showFiles: true,
       showTotal: true
@@ -122,6 +164,8 @@ const html = () => {
       basepath: '@file',
       indent: true
     }))
+    .pipe(replace(ENTRY_POINT, config.js.outfile)) // replacement
+    .pipe(_if(isProduction, replace(MAIN_CSS_FILE_NAME, MAIN_CSS_FILE_NAME_MIN))) // replacement prod
     .pipe(size({
       showFiles: true,
       showTotal: true
@@ -159,6 +203,12 @@ const startExpress = () => {
   })
 }
 
+// log succes message when build series is done
+const build_success = (done) => {
+  log('All build tasks completed successfully.'.green)
+  done()
+}
+
 // Define watchers
 const watch_js = () => watch(config.js.src, esbuild).on('change', () => log("Watching 'js'"))
 const watch_sass = () => watch(config.scss.glob, sass).on('change', () => log("Watching 'sass'"))
@@ -172,6 +222,7 @@ const watch_html = () => watch(config.html.glob, html).on('change', () => log("W
 // create JS bundle and watch JS file changes
 const dev = parallel(
   series(
+    logger,
     esbuild,
     sass,
     html,
@@ -182,6 +233,16 @@ const dev = parallel(
   watch_html,
   watch_js,
   watch_sass
+)
+
+const build = series(
+  logger,
+  del,
+  image,
+  esbuild,
+  sass,
+  html,
+  build_success,
 )
 
 /**
@@ -195,5 +256,8 @@ module.exports = {
   html,
   image,
   _open,
-  dev
+  del,
+  dev,
+  build,
+  startExpress
 }
