@@ -6,6 +6,8 @@
   --blue-lighten: aliceblue;
 }
 
+
+
 body {
   min-height: 100vh; // minimum full viewport height
   width: 100%; // full viewport width
@@ -15,6 +17,9 @@ body {
   // justify-content: center;
   font-family: 'Shippori Mincho', serif;
   color: var(--black);
+  box-sizing: border-box;
+  margin: 0px; // remove default browser margin
+  padding: 0px 20px 20px 20px; // remove default browser padding
 }
 
 // https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
@@ -42,14 +47,31 @@ input::selection{
   background-color: transparent;
 }
 
-.delete{
-  margin-right: 10px;
+// .delete{
+//   margin-left: 10px;
+// }
+
+.btn{
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 }
+
 .btn input {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
+  text-align: center;
+  width: 50px;
+  padding: 0px;
 }
 
 .rounded{
@@ -98,6 +120,12 @@ input::selection{
   background-color: var(--white);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  &__default{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   &__header{
     display: flex;
     justify-content: space-between;
@@ -110,8 +138,11 @@ input::selection{
   &__product{
     &__infos{
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    &__details{
+    &__details, &__selection{
       // background-color: #dcfce7;
       display: flex;
       align-items: center;

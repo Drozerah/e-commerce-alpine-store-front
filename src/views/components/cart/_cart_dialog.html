@@ -22,18 +22,29 @@
         <h2 class="cart__dialog__title" x-text="`Cart (${$store._.cart_total})`"></h2>
         <button type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" >X</button>
       </div>
+      <div x-show="!$store._.cart_total" class="cart__dialog__default">
+        <h3>Your cart is empty</h3>
+      </div>
       <!-- end cart dialog header -->
       <!-- cart dialog main -->
       <ul class="cart__dialog__main">
-        <template x-for="product in $store._.products">
+        <template x-for="product in $store._.products" :key="product.id">
             <li class="cart__dialog__product list" x-data="{name: product.name, weight: product.weight}">
               <div class="cart__dialog__product__thumbnail">
                 <img src="/img/thumbnails/placeholder_70.png" alt="" srcset="">
               </div>
               <div class="cart__dialog__product__infos">
                 <div class="cart__dialog__product__details">
-                  <div class="cart__dialog__product__title" x-tash="name,weight">{name} {weight}g</div>
+                  <div class="cart__dialog__product__title" x-tash="name, weight">{name} {weight}g</div>
                   <div x-money="(product.price * 100) * (product.quantity)" data-lang="fr-FR" data-currency="EUR"></div>
+                </div>
+                <div class="cart__dialog__product__selection">
+                  <div class="btn">
+                    <button type="button" @click="$store._.remove(product)" :disabled="!$store._.counter[product.id]">-</button>
+                    <input inputmode="numeric" min="0" max="100" :value="$store._.counter[product.id] || 0" disabled></input>
+                    <button type="button" @click="$store._.add(product)" :disabled="$store._.counter[product.id] == 10">+</button>
+                  </div>
+                  <button type="button" class="delete" @click="$store._.delete(product)" :disabled="!$store._.counter[product.id]">Delete</button>
                 </div>
               </div>
             </li>
@@ -41,7 +52,7 @@
       </ul>
       <!-- end cart dialog main -->
       <!-- cart dialog footer -->
-      <div class="cart__dialog__footer">
+      <div x-show="$store._.cart_total" class="cart__dialog__footer">
         <div class="cart__dialog__subtotal">
           <div>Subtotal</div>
           <div x-money="$store._.cart_amount * 100" data-lang="fr-FR" data-currency="EUR"></div>
@@ -50,7 +61,7 @@
           Shipping will be calculated at checkout.
         </div>
         <div class="cart__dialog__checkout">
-          <button type="button" disabled>CHECKOUT</button>
+          <button @click="alert('Checkout is not implemented yet!')" type="button">CHECKOUT</button>
         </div>
       </div>
       <!-- end cart dialog footer -->

@@ -29,7 +29,7 @@
     <hr>
   </header>
 
-  @@include('./components/products/_products.html')
+  @@include('./components/card/_products.html')
   
   <br>
   <!-- cart amount -->
@@ -44,6 +44,12 @@
     <hr>
   </div>
   <!-- end cart amount -->
+  <!-- cart dialog button -->
+  <div>
+    <button x-data type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" :disabled="$store._.isCartDialog">View Cart</button>
+  <hr>
+  </div>
+  <!-- end cart dialog button -->
   <!-- clear cart button -->
   <div>
     <button 
@@ -52,15 +58,8 @@
       :disabled="$store._.cart_total == 0"
       @click="$store._.clear()"
     >Clear Cart</button>
-    <hr>
   </div>
   <!-- end clear cart button -->
-
-  <!-- cart dialog button -->
-  <div>
-    <button x-data type="button" @click="$store._.isCartDialog = !$store._.isCartDialog" :disabled="$store._.isCartDialog">View Cart</button>
-  </div>
-  <!-- end cart dialog button -->
 
   @@include('./components/cart/_cart_dialog.html')
   @@include('./components/_footer.html')
