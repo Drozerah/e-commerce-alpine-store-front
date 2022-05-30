@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My E-Commerce</title>
-  <script src="/js/app.bundle.js" defer></script>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <header>
-    <h1>My E-Commerce</h1>
-    <hr>
-    <!-- cart info -->
-    @@include('./components/cart/_cart_infos.html')
-    <!-- end cart info -->
-    <hr>
-  </header>
-
-  @@include('./components/card/_card_products.html')
-  
-  <br>
-  <!-- cart amount -->
-  <div>
-    <hr>
-    @@include('./components/cart/_cart_display_amount.html')
-    <hr>
-  </div>
-  <!-- end cart amount -->
-
-  <!-- cart dialog button -->
-  <div>
-    @@include('./components/cart/buttons/_cart_show_dialog_btn.html')
-    <hr>
-  </div>
-  <!-- end cart dialog button -->
-
-  <!-- clear cart button -->
-  <div>
-    @@include('./components/cart/buttons/_cart_clear_btn.html')
-    <hr>
-  </div>
-  <!-- end clear cart button -->
-
-  @@include('./components/cart/_cart_dialog.html')
-  @@include('./components/_footer.html')
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Commerce</title>
+    <script src="/js/app.bundle.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>My E-Commerce</h1>
+      <hr>
+      <!-- cart info -->
+      @@include('./components/cart/_cart_infos.html')
+      <!-- end cart info -->
+      <hr>
+    </header>
+    <main>
+      <!-- cards products -->
+      <div>
+        @@include('./components/card/_card_product.html')
+      </div>
+      <!-- end cards products -->
+      
+      <!-- cart amount -->
+      <div>
+        <hr>
+        @@include('./components/cart/_cart_display_amount.html')
+        <hr>
+      </div>
+      <!-- end cart amount -->
+    
+      <!-- cart dialog button -->
+      <div>
+        @@include('./components/cart/buttons/_cart_show_dialog_btn.html')
+        <hr>
+      </div>
+      <!-- end cart dialog button -->
+    
+      <!-- clear cart button -->
+      <div>
+        @@include('./components/cart/buttons/_cart_clear_btn.html')
+        <hr>
+      </div>
+      <!-- end clear cart button -->
+      @@include('./components/cart/_cart_dialog.html')
+    </main>
+    @@include('./components/_footer.html')
+  </body>
 </html>
