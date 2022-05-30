@@ -54,7 +54,7 @@ Alpine.store('_', {
 
   add(root) {
     // ref product id
-    const id = root.dataset.id
+    const id = root.id || root.dataset.id
     // get product
     let product = this.getProductById(id)
 
@@ -73,7 +73,7 @@ Alpine.store('_', {
 
   delete(root) {
     // ref product id
-    const id = root.dataset.id
+    const id = root.id || root.dataset.id
     const isProductToDelete = this.products.find((product) => product.id == id)
     if(isProductToDelete){
       // remove product from counter
@@ -101,7 +101,7 @@ Alpine.store('_', {
 
   remove(root) {
     // ref product id
-    const id = root.dataset.id
+    const id = root.id || root.dataset.id
     // get product
     const product = this.getProductById(id)
     if (product) {
