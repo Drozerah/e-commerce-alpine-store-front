@@ -4,7 +4,6 @@ import money from "alpinejs-money"
 import tash from "alpinejs-tash"
 console.log('JS is loaded') // !DEBUG
 
-
 Alpine.plugin(persist)
 
 Alpine.store('_', {
@@ -149,7 +148,7 @@ Alpine.store('_', {
   init(){
     // reload opend tabs
     window.addEventListener('storage', () => location.reload())
-    
+
     Alpine.effect(() => {
       // add/remove class name of noScroll to body according to slideout state
       const isCartDialog = Alpine.store('_').isCartDialog
@@ -158,7 +157,6 @@ Alpine.store('_', {
     })
   }
 })
-
 
 window.Alpine = Alpine
 Alpine.plugin(money)
