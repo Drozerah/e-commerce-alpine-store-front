@@ -35,21 +35,18 @@
   <!-- cart amount -->
   <div>
     <hr>
-    <div x-data> 
-    <div>
-      <span>Cart Amount:</span>
-      <span x-money="$store._.cart_amount * 100" data-lang="fr-FR" data-currency="EUR"></span>
-    </div>
-    </div>
+    @@include('./components/cart/_cart_display_amount.html')
     <hr>
   </div>
   <!-- end cart amount -->
+
   <!-- cart dialog button -->
   <div>
     @@include('./components/cart/buttons/_cart_show_dialog_btn.html')
     <hr>
   </div>
   <!-- end cart dialog button -->
+
   <!-- clear cart button -->
   <div>
     @@include('./components/cart/buttons/_cart_clear_btn.html')
