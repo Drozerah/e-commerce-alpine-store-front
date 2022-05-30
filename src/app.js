@@ -13,6 +13,7 @@ Alpine.store('_', {
   counter: {},
   cart_total: 0,
   cart_amount: 0,
+  cart_weight: 0,
   isInit: false, // this._init once
   isCartDialog: Alpine.$persist(false).as('isCartDialog'), // show/hide cart dialog box
 
@@ -32,6 +33,8 @@ Alpine.store('_', {
     this.counter[product.id] = product.quantity
     // update cart_amount
     this.cart_amount = this.getCartAmount()
+    // update cart_weight
+    this.cart_weight = this.getCartWeight()
   },
 
   saveProduct(product){
@@ -77,8 +80,10 @@ Alpine.store('_', {
     if(isProductToDelete){
       // remove product from counter
       delete this.counter[isProductToDelete.id]
-      // remove quantity from cart_total
+      // remove product quantity from cart_total
       this.cart_total = this.cart_total - isProductToDelete.quantity
+      // remove product weight from cart_weight
+      this.cart_weight = this.cart_weight - isProductToDelete.weight
       // remove product quatity
       isProductToDelete.quantity = 0
       // update cart amount
@@ -128,6 +133,12 @@ Alpine.store('_', {
     const initialValue = 0
     const amount = this.products.reduce((acc, cur) => acc + (cur.price * cur.quantity), initialValue)
     return amount
+  },
+
+  getCartWeight () {
+    const initialValue = 0
+    const weight = this.products.reduce((acc, cur) => acc + (cur.weight * cur.quantity), initialValue)
+    return weight
   },
 
   setCartCounter () {
