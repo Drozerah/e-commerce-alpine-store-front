@@ -93,9 +93,9 @@ Alpine.store('_', {
       delete this.counter[isProductToDelete.id]
       // remove product quantity from cart_total
       this.cart_total = this.cart_total - isProductToDelete.quantity
-      // remove product weight from cart_weight
-      this.cart_weight = this.cart_weight - isProductToDelete.weight
-      // remove product quatity
+      // remove product weight by total quantity from cart_weight
+      this.cart_weight = this.cart_weight - (isProductToDelete.weight * isProductToDelete.quantity)
+      // reset product quatity
       isProductToDelete.quantity = 0
       // update cart amount
       this.cart_amount = this.getCartAmount()
@@ -107,11 +107,12 @@ Alpine.store('_', {
   },
 
   clear(){
-    console.log('clear');
+    // reset store values
     this.counter = {}
     this.products = []
     this.cart_total = 0
     this.cart_amount = 0
+    this.cart_weight = 0
   },
 
   remove(root) {
@@ -163,6 +164,7 @@ Alpine.store('_', {
       this.cart_total = this.getCartTotal()
       this.cart_amount = this.getCartAmount()
       this.counter = this.setCartCounter()
+      this.cart_weight = this.getCartWeight()
       this.isInit = true
     }
   },
