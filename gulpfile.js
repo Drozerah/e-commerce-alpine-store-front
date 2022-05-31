@@ -47,6 +47,11 @@ const rename = require("gulp-rename")
  * ------------------------------------------------------------------------
  */
 const { NODE_ENV = 'development' } = process.env
+const CURRENT_TIMESTAMPS           = (() => Date.now())()
+const DATE                         = new Date(CURRENT_TIMESTAMPS)
+const CURRENT_YEAR                 = DATE.getFullYear()
+const AUTHOR_NAME                  = 'Thomas G. aka Drozerah'
+const AUTHOR_GITHUB_LINK           = 'https://gist.github.com/Drozerah/c21e5763d4d92bc429b995854e27f4ac'
 const isProduction = NODE_ENV === 'production' ? true : false
 const isDevelopment = NODE_ENV === 'development' ? true : false
 const BASE_DIR = process.cwd()
@@ -61,6 +66,12 @@ const ENTRY_POINT_BUNDLE = 'app.bundle.js'
 const ENTRY_POINT_BUNDLE_MIN = 'app.bundle.min.js'
 const OUTPUT_DIR = path.join(BASE_DIR, OUTPUT_DIR_NAME)
 const SRC_DIR = path.join(BASE_DIR, SRC_DIR_NAME)
+const JS_BANNER =
+`/*!
+* ${AUTHOR_NAME}
+* ${AUTHOR_GITHUB_LINK}
+* Copyright © ${CURRENT_YEAR}
+*/`
 
 // Paths
 const config = {
@@ -130,6 +141,9 @@ const esbuild = () => {
       minifyIdentifiers: isProduction, // prod
       minifySyntax: isProduction, // prod
       format: 'esm', // 'iife'|'cjs'|'esm'
+      banner: {
+        js: JS_BANNER
+      }
     }))
     .pipe(size({
       showFiles: true,
@@ -144,7 +158,8 @@ const sass = () => {
   const _dest = config.scss.dest
   return src(_src)
     .pipe(_sass({
-      outputStyle: isDevelopment ? 'expanded' : 'compressed' // dev || prod
+      outputStyle: isDevelopment ? 'expanded' : 'compressed', // dev || prod
+      ignoreAnnotations: true,
     }).on('error', _sass.logError))
     .pipe(_if(isProduction, rename(MAIN_CSS_FILE_NAME_MIN))) // prod rename
     .pipe(size({
