@@ -1,7 +1,7 @@
 import persist from '@alpinejs/persist'
 import Alpine from 'alpinejs'
-import money from "alpinejs-money"
-import tash from "alpinejs-tash"
+import money from 'alpinejs-money'
+import tash from 'alpinejs-tash'
 console.log('JS is loaded') // !DEBUG
 
 Alpine.plugin(persist)
@@ -10,9 +10,9 @@ Alpine.data('filters', () => ({
   format_weight (weight) {
     if (weight >= 1000) {
       weight = weight / 1000
-      return `${weight > 1 ? `${weight} kgs` : `${weight} kg` }`
+      return `${weight > 1 ? `${weight} kgs` : `${weight} kg`}`
     } else {
-      return `${weight === 0 ? weight : `${weight} g` }`
+      return `${weight === 0 ? weight : `${weight} g`}`
     }
   }
 }))
@@ -28,7 +28,7 @@ Alpine.store('_', {
   isInit: false, // this._init once
   isCartDialog: Alpine.$persist(false).as('isCartDialog'), // show/hide cart dialog box
 
-  updateStore(event, product){
+  updateStore (event, product) {
     if (event === 'increment') {
       // update quantity
       product.quantity++
@@ -48,12 +48,12 @@ Alpine.store('_', {
     this.cart_weight = this.getCartWeight()
   },
 
-  saveProduct(product){
+  saveProduct (product) {
     // add product to products list
     this.products.push(product)
   },
 
-  createProduct(root){
+  createProduct (root) {
     // create product Object
     const product = {
       id: root.dataset.id,
@@ -65,7 +65,7 @@ Alpine.store('_', {
     return product
   },
 
-  add(root) {
+  add (root) {
     // ref product id
     const id = root.id || root.dataset.id
     // get product
@@ -84,11 +84,11 @@ Alpine.store('_', {
     }
   },
 
-  delete(root) {
+  delete (root) {
     // ref product id
     const id = root.id || root.dataset.id
-    const isProductToDelete = this.products.find((product) => product.id == id)
-    if(isProductToDelete){
+    const isProductToDelete = this.products.find((product) => product.id === id)
+    if (isProductToDelete) {
       // remove product from counter
       delete this.counter[isProductToDelete.id]
       // remove product quantity from cart_total
@@ -102,11 +102,12 @@ Alpine.store('_', {
       // update cart products list
       this.products = this.products.filter((product) => product.id !== id)
     } else {
+      // eslint-disable-next-line no-useless-return
       return
     }
   },
 
-  clear(){
+  clear () {
     // reset store values
     this.counter = {}
     this.products = []
@@ -115,7 +116,7 @@ Alpine.store('_', {
     this.cart_weight = 0
   },
 
-  remove(root) {
+  remove (root) {
     // ref product id
     const id = root.id || root.dataset.id
     // get product
@@ -130,7 +131,7 @@ Alpine.store('_', {
     }
   },
 
-  getProductById(id){
+  getProductById (id) {
     const isProduct = this.products.filter((product) => product.id === id)
     return isProduct[0]
   },
@@ -155,11 +156,11 @@ Alpine.store('_', {
 
   setCartCounter () {
     const counter = {}
-    this.products.map(product => counter[product.id] = product.quantity)
+    this.products.map(product => counter[product.id] === product.quantity)
     return counter
   },
 
-  _init(){
+  _init () {
     if (!this.isInit) {
       this.cart_total = this.getCartTotal()
       this.cart_amount = this.getCartAmount()
@@ -169,7 +170,7 @@ Alpine.store('_', {
     }
   },
 
-  init(){
+  init () {
     // reload opend tabs
     window.addEventListener('storage', () => location.reload())
 
