@@ -9,7 +9,11 @@
     "build": "cross-env NODE_ENV=production gulp build"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Thomas G. aka Drozerah",
+    "email": "drozerah@gmail.com",
+    "url": "https://github.com/Drozerah"
+  },
   "license": "ISC",
   "devDependencies": {
     "colors": "^1.4.0",
