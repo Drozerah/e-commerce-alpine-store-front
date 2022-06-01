@@ -28,6 +28,6 @@ app.use((error, req, res, next) => {
   })
 })
 
-app.listen(app.get('PORT'), function(){
+app.listen(app.get('PORT'), function () {
   console.log(`[express] listening http://localhost:${this.address().port}`)
 })
