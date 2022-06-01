@@ -5,9 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development gulp dev",
-    "start:dev": "cross-env NODE_ENV=development nodemon server.js",
-    "build": "cross-env NODE_ENV=production gulp build",
-    "start:prod": "cross-env NODE_ENV=development nodemon server.js"
+    "serve": "cross-env nodemon server.js",
+    "build": "cross-env NODE_ENV=production gulp build"
   },
   "keywords": [],
   "author": "",
