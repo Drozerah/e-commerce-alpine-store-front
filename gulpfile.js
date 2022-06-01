@@ -40,6 +40,7 @@ const _del = require('del')
 const _if = require('gulp-if')
 const replace = require('gulp-replace')
 const rename = require("gulp-rename")
+const gulpESLintNew = require('gulp-eslint-new')
 
 /**
  * ------------------------------------------------------------------------
@@ -130,6 +131,8 @@ const esbuild = () => {
   const _dest = config.js.dest
   const outfile = config.js.outfile
   return src(_src)
+    .pipe(_if(isDevelopment,gulpESLintNew())) // ESlint dev
+    .pipe(_if(isDevelopment,gulpESLintNew.format())) // ESlint dev
     .pipe(gulpEsbuild({
       outfile,
       bundle: true,
